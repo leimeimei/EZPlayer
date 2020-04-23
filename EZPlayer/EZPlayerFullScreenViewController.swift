@@ -74,7 +74,7 @@ open class EZPlayerFullScreenViewController: UIViewController {
             self.currentOrientation = .portrait
             return .portrait
         case .landscape:
-            self.statusbarBackgroundView.isHidden = EZPlayerUtils.isPhoneX
+            self.statusbarBackgroundView.isHidden = (EZPlayerUtils.hasSafeArea || (ProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 13))
             return self.preferredlandscapeForPresentation
         }
     }
@@ -114,8 +114,7 @@ open class EZPlayerFullScreenViewController: UIViewController {
 
     }
     
-    
-    open override func prefersHomeIndicatorAutoHidden() -> Bool {
+    open override var prefersHomeIndicatorAutoHidden: Bool{
         return self.player.controlsHidden
     }
 
